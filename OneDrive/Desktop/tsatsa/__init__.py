@@ -1,2 +1,0 @@
-# initilize database
-# secret
