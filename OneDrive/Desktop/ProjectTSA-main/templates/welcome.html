@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <style>
+    /*styling*/
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #e3f2fd, #a3f990);
+            color: #f5eded;
+            flex-direction: column;
+            text-align: center;
+        }
+        /*styling welcome and its container*/
+        .welcome-container {
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            margin-left: 250px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #4CAF50;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #1d1c1c;
+            margin-bottom: 20px;
+        }
+        /*styling all buttons used on the page and its properties*/
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            background: #4CAF50;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <!--formatting it via html so that its displayed on web page-->
+    <div class="welcome-container">
+        <h1>Welcome!</h1>
+        <p>If you already have an account, please log in. If this is your first time here, sign up to get started.</p>
+        <div class="buttons">
+            <a href="/login" class="btn">Login</a>
+            <a href="/signup" class="btn">Sign Up</a>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

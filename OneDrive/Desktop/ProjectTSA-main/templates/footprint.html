@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    /* Applying a soft green gradient background for a fresh look */
+    body {
+        background: linear-gradient(135deg, #f0f7f0 0%, #e8f5e9 100%);
+        min-height: 100vh;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    /* Styling for the help section with a gradient and interactive effects */
+    .help-section {
+        background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+        padding: 35px;
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(44, 85, 48, 0.2);
+        margin-bottom: 40px;
+        text-align: center;
+        transition: transform 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .help-section:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px rgba(44, 85, 48, 0.3);
+    }
+
+    /* Main title styling */
+    .help-title {
+        color: white;
+        font-size: 2rem;
+        margin-bottom: 15px;
+        font-weight: 600;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    /* Making the help text stand out */
+    .help-text {
+        color: rgba(255,255,255,0.9);
+        margin-bottom: 25px;
+        line-height: 1.6;
+        font-size: 1.2rem;
+    }
+
+    /* Button styling for the quick guide */
+    .guide-btn {
+        background: white;
+        color: #4CAF50;
+        border: none;
+        padding: 15px 35px;
+        border-radius: 50px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    /* Form input styles to make them more user-friendly */
+    .form-control {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.9);
+    }
+
+    .form-control:focus {
+        border-color: #4CAF50;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+    }
+
+    /* Button for form submission */
+    .btn-primary {
+        background: linear-gradient(90deg, #4CAF50 0%, #45a049 100%);
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    /* Animation effect for results section */
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Responsive styling for smaller screens */
+    @media (max-width: 768px) {
+        .container {
+            padding: 15px;
+        }
+        
+        .help-section, .calculator-section {
+            padding: 25px;
+        }
+    }
+</style>
+
+<div class="container">
+    <!-- Help section to guide users before they start using the calculator -->
+    <div class="help-section">
+        <h3 class="help-title">Need Help Getting Started?</h3>
+        <p class="help-text">Not sure what numbers to enter? Don't worry! We'll guide you through some simple questions to help you understand your farm's carbon footprint.</p>
+        <a href="/footprint-guide" class="guide-btn">
+            Take the Quick Guide
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Main calculator section where users input their farm data -->
+    <div class="calculator-section">
+        <h2>Farm Carbon Footprint Calculator</h2>
+        
+        <form method="POST">
+            <!-- Inputs for fuel usage -->
+            <div class="form-group">
+                <label for="diesel">Diesel Usage (liters)</label>
+                <input type="number" step="0.01" min="0" class="form-control" id="diesel" name="diesel" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="gasoline">Gasoline Usage (liters)</label>
+                <input type="number" step="0.01" min="0" class="form-control" id="gasoline" name="gasoline" required>
+            </div>
+            
+            <!-- Inouts for energy and fertilizer -->
+            <div class="form-group">
+                <label for="electricity">Electricity Usage (kWh)</label>
+                <input type="number" step="0.01" min="0" class="form-control" id="electricity" name="electricity" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="fertilizer">Fertilizer Usage (kg)</label>
+                <input type="number" step="0.01" min="0" class="form-control" id="fertilizer" name="fertilizer" required>
+            </div>
+            
+            <!-- Inout for livestock -->
+            <div class="form-group">
+                <label for="livestock">Number of Livestock</label>
+                <input type="number" min="0" class="form-control" id="livestock" name="livestock" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Calculate Footprint</button>
+        </form>
+    </div>
+
+    <!-- Displaying results -->
+    {% if show_results %}
+    <div class="results">
+        <h3>Results</h3>
+        <p>Total Emissions: {{ "%.2f"|format(total_emissions) }} kg CO2</p>
+        
+        <h4>Breakdown by Activity:</h4>
+        <ul>
+        {% for activity, amount in emissions.items() %}
+            <li>{{ activity }}: {{ "%.2f"|format(amount) }} kg CO2</li>
+        {% endfor %}
+        </ul>
+        
+        <!-- Suggesting user recommendations to reduce their footprint -->
+        <div class="recommendations">
+            <h4>Recommendations:</h4>
+            <ul>
+            {% for recommendation in recommendations %}
+                <li>{{ recommendation }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Resetting button for clearing any inputs -->
+        <form action="{{ url_for('reset_footprint') }}" method="POST">
+            <button type="submit" class="btn btn-danger">Reset Calculator</button>
+        </form>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

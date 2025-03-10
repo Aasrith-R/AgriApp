@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.product_name }} - Farm to Table Journey</title>
+    <!--Importing font from google fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /*styling body*/
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f5f7fa;
+            color: #2c3e50;
+        }
+        /*styling product and its properites*/
+        .product-hero {
+            background: linear-gradient(135deg, #43a047 0%, #1b5e20 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .product-title {
+            font-size: 2.5rem;
+            margin: 0;
+            padding-bottom: 1rem;
+        }
+
+        .farm-name {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .product-container {
+            max-width: 1000px;
+            margin: -3rem auto 2rem;
+            padding: 0 2rem;
+        }
+         /*styling info card*/
+
+        .info-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+         /*styling stat and its properties*/
+
+        .stat-box {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #2e7d32;
+            margin: 0.5rem 0;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .certification-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-radius: 20px;
+            margin: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+        /*styling timeline*/
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: #e0e0e0;
+        }
+
+        .timeline-item {
+            margin: 2rem 0;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 80%;
+        }
+        /*styling eco-practices and badges*/
+
+        .eco-practices {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .eco-badge {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        /*styling footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            background: #2c3e50;
+            color: white;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!--formatting products page by integrating styles and tying it to backend so it is displayed on a webpage-->
+    <div class="product-hero">
+        <h1 class="product-title">{{ product.product_name }}</h1>
+        <div class="farm-name">{{ product.farm_name }} • {{ product.location }}</div>
+    </div>
+
+    <div class="product-container">
+        <div class="info-card">
+            <h2>Product Overview</h2>
+            <div class="card-grid">
+                <div class="stat-box">
+                    <div class="stat-label">Variety</div>
+                    <div class="stat-value">{{ product.variety }}</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Organic Status</div>
+                    <div class="stat-value">{{ product.organic_status }}</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Carbon Footprint</div>
+                    <div class="stat-value">{{ product.carbon_footprint }} kg CO₂e</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <h2>Certifications</h2>
+            <div class="certifications">
+                {% for cert in product.certifications %}
+                    <span class="certification-badge">✓ {{ cert }}</span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="info-card">
+            <h2>Sustainable Practices</h2>
+            <div class="eco-practices">
+                {% for practice in product.sustainable_practices %}
+                    <span class="eco-badge">
+                        🌱 {{ practice }}
+                    </span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="info-card">
+            <h2>Farm to Table Journey</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>🌱 Harvested</h3>
+                        <p>{{ product.harvest_date }}</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>✅ Quality Verified</h3>
+                        <p>Product meets all quality standards and certifications</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>🚛 Ready for Distribution</h3>
+                        <p>Product is ready for its journey to your table</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Verified on Blockchain • {{ product.timestamp }}</p>
+        <p>Product ID: {{ product.product_id }}</p>
+    </div>
+</body>
+</html> 

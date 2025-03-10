@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Machine Learning Recommendations/title>
+</head>
+<body>
+    <h1>Plant Care Recommendations for {{ city_name }}</h1>
+
+    <form method="POST" action="{{ url_for('machine_learning') }}">
+        <label for="plant_type">Enter Plant Type:</label>
+        <input type="text" id="plant_type" name="plant_type" placeholder="e.g., Tomato, Rose" value="{{ plant_type }}">
+        <button type="submit">Get Recommendations</button>
+    </form>
+
+    <!-- Display recommendations if THERE ARE SOME -->
+    {% if recommendations %}
+    <h2>Recommendations for {{ plant_type }}</h2>
+    <ul>
+        {% for recommendation in recommendations %}
+        <li>{{ recommendation }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>

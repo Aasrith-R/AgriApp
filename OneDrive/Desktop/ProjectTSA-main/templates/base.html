@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      crossorigin="anonymous"
+    />
+    <style>
+     .navbar {
+        background-color: #4CAF50;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        padding: 0.5rem 2rem;
+    }
+
+    .navbar-brand {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: white !important;
+        text-decoration: none;
+        margin-right: 2rem;
+    }
+
+    .navbar-nav {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .nav-link {
+        color: white !important;
+        font-weight: 500;
+        text-decoration: none;
+        padding: 1rem 1.5rem;
+        transition: color 0.3s ease;
+        font-size: 1.1rem;
+    }
+
+    .nav-link:hover {
+        color: #b2dfdb !important;
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-link.active {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: white !important;
+    }
+    .logout-button {
+        margin-left: auto;
+        padding: 0.5rem 1rem;
+        color: #4CAF50 !important;
+        background-color: #4CAF50;
+        border: 2px solid #4CAF50;
+        border-radius: 5px;
+        transition: background 0.3s ease, color 0.3s ease;
+        }
+    .logout-button:hover {
+         background-color: #ffffff;
+         color: #4CAF50 !important;
+        }
+
+    /* Ensure items stay in line on smaller screens */
+    @media (max-width: 991px) {
+        .navbar-nav {
+            flex-wrap: nowrap;
+            overflow-x: auto;
+        }
+        
+        .nav-link {
+            white-space: nowrap;
+        }
+    }
+    </style>
+     <title>{% block title %}Home{% endblock %}</title>
+    </head>
+    <body>
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <div class="navbar-nav w-100 d-flex align-items-center">
+                <a class="navbar-brand me-4" href="/">AgriApp</a>
+                <a class="nav-link" href="/a">Home</a>
+                <a class="nav-link" href="/agribot">Agribot</a>
+                <a class="nav-link" href="/footprint">Carbon Footprint</a>
+                <a class="nav-link" href="/blocksupchain">Supply Chain Management</a>
+                <a class="nav-link active" href="/schedule">Plant Schedule</a>
+                <a class="logout-button nav-link" href="/logout">Logout</a>
+            </div>
+        </div>
+      </nav>
+
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %} {% for category, message in messages %} {% if category ==
+    'error' %}
+    <div class="alert alert-danger alter-dismissable fade show" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% else %}
+    <div class="alert alert-success alter-dismissable fade show" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endif %} {% endfor %} {% endif %} {% endwith %}
+
+    <div class="container">{% block content %} {% endblock %}</div>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      if (NUMLOGIN > 1) {
+        print("yes")
+      }
+    </script>
+{% block javascript %}
+    <script type="text/javascript">
+      function deleteNote(noteId) {
+  fetch("/delete-note", {
+    method: "POST",
+    body: JSON.stringify({ noteId: noteId }),
+  }).then((_res) => {
+    window.location.href = "/";
+  });
+  }
+</script>
+{% endblock %}
+  </body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #f0f7f0 0%, #e8f5e9 100%);
+        color: #2c5530;
+        padding-top: 80px;
+        min-height: 100vh;
+    }
+
+    .navbar {
+        background-color: #4CAF50;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        padding: 0.5rem 2rem;
+    }
+
+    .navbar-brand {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: white !important;
+        text-decoration: none;
+        margin-right: 2rem;
+    }
+
+    .navbar-nav {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .nav-link {
+        color: white !important;
+        font-weight: 500;
+        text-decoration: none;
+        padding: 1rem 1.5rem;
+        transition: color 0.3s ease;
+        font-size: 1.1rem;
+    }
+
+    .nav-link:hover {
+        color: #b2dfdb !important;
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-link.active {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: white !important;
+    }
+
+    /* Ensure items stay in line on smaller screens */
+    @media (max-width: 991px) {
+        .navbar-nav {
+            flex-wrap: nowrap;
+            overflow-x: auto;
+        }
+        
+        .nav-link {
+            white-space: nowrap;
+        }
+    }
+</style>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <div class="navbar-nav w-100 d-flex align-items-center">
+                <a class="navbar-brand me-4" href="/">AgriApp</a>
+                <a class="nav-link" href="/">Home</a>
+                <a class="nav-link" href="/agribot">Agribot</a>
+                <a class="nav-link" href="/footprint">Carbon Footprint</a>
+                <a class="nav-link" href="/blocksupchain">Supply Chain Management</a>
+                <a class="nav-link active" href="/schedule">Plant Schedule</a>
+            </div>
+        </div>
+    </nav>
+    
+</body>
+</html>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #f0f7f0 0%, #e8f5e9 100%);
+        color: #2c5530;
+        padding-top: 80px;
+        min-height: 100vh;
+    }
+
+    .navbar {
+        background-color: #4CAF50;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        padding: 0.5rem 2rem;
+    }
+
+    .navbar-brand {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: white !important;
+        text-decoration: none;
+        margin-right: 2rem;
+    }
+
+    .navbar-nav {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .nav-link {
+        color: white !important;
+        font-weight: 500;
+        text-decoration: none;
+        padding: 1rem 1.5rem;
+        transition: color 0.3s ease;
+        font-size: 1.1rem;
+    }
+
+    .nav-link:hover {
+        color: #b2dfdb !important;
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-link.active {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: white !important;
+    }
+
+    /* Ensure items stay in line on smaller screens */
+    @media (max-width: 991px) {
+        .navbar-nav {
+            flex-wrap: nowrap;
+            overflow-x: auto;
+        }
+        
+        .nav-link {
+            white-space: nowrap;
+        }
+    }

@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    /*styying container */
+    .guide-container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 30px;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(44, 85, 48, 0.1);
+    }
+    /*styling question-card and its properites */
+    .question-card {
+        background: white;
+        padding: 25px;
+        margin: 20px 0;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease;
+    }
+
+    .question-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .question-title {
+        color: #2c5530;
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+        font-weight: 600;
+    }
+    /*styling options and its properites */
+
+    .options-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-top: 15px;
+    }
+
+    .option-btn {
+        background: #f5f5f5;
+        border: 2px solid #e0e0e0;
+        padding: 15px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: left;
+    }
+
+    .option-btn:hover {
+        border-color: #4CAF50;
+        background: #f0f7f0;
+    }
+
+    .option-btn.selected {
+        background: #e8f5e9;
+        border-color: #4CAF50;
+    }
+    /*styling submit buttons and its properites */
+
+    .submit-btn {
+        background: #4CAF50;
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .submit-btn:hover {
+        background: #45a049;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+    }
+</style>
+<!--formatting footpritnt page-->
+<!--formatting guide container-->
+<div class="guide-container">
+    <h2>Farm Carbon Footprint Guide</h2>
+    <p class="lead">Answer these questions about your farm to help us estimate your carbon footprint.</p>
+
+    <form method="POST">
+        <div class="question-card">
+            <h3 class="question-title">What type of farm machinery do you primarily use?</h3>
+            <div class="options-grid">
+                <label class="option-btn">
+                    <input type="radio" name="machinery" value="modern" required>
+                    <span>Modern Fuel-Efficient Equipment</span>
+                </label>
+                <label class="option-btn">
+                    <input type="radio" name="machinery" value="older">
+                    <span>Older Equipment</span>
+                </label>
+                <label class="option-btn">
+                    <input type="radio" name="machinery" value="minimal">
+                    <span>Minimal Machinery Use</span>
+                </label>
+            </div>
+        </div>
+        <!--formatting question card-->
+        <div class="question-card">
+            <h3 class="question-title">What's your primary fertilizer usage?</h3>
+            <div class="options-grid">
+                <label class="option-btn">
+                    <input type="radio" name="fertilizer_type" value="synthetic" required>
+                    <span>Synthetic Fertilizers</span>
+                </label>
+                <label class="option-btn">
+                    <input type="radio" name="fertilizer_type" value="organic">
+                    <span>Organic Fertilizers</span>
+                </label>
+                <label class="option-btn">
+                    <input type="radio" name="fertilizer_type" value="minimal">
+                    <span>Minimal/No Fertilizers</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <h3 class="question-title">What's your farm's energy source?</h3>
+            <div class="options-grid">
+                <label class="option-btn">
+                    <input type="radio" name="energy" value="grid" required>
+                    <span>Grid Electricity</span>
+                </label>
+                <label class="option-btn">
+                    <input type="radio" name="energy" value="solar">
+                    <span>Solar/Renewable Energy</span>
+                </label>
+                <label class="option-btn">
+                    <input type="radio" name="energy" value="mixed">
+                    <span>Mixed Sources</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <h3 class="question-title">Do you have livestock on your farm?</h3>
+            <div class="options-grid">
+                <label class="option-btn">
+                    <input type="radio" name="livestock" value="large" required>
+                    <span>Large Herd (50+ animals)</span>
+                </label>
+                <label class="option-btn">
+                    <input type="radio" name="livestock" value="small">
+                    <span>Small Herd (< 50 animals)</span>
+                </label>
+                <label class="option-btn">
+                    <input type="radio" name="livestock" value="none">
+                    <span>No Livestock</span>
+                </label>
+            </div>
+        </div>
+
+        <button type="submit" class="submit-btn">Calculate Farm Footprint</button>
+    </form>
+</div>
+{% endblock %} 

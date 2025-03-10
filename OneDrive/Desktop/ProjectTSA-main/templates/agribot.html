@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agribot</title>
+    {% block content %}
+
+    <style>
+        /* General Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000; /* Ensures it stays above other elements */
+            background-color: #4CAF50; /* Ensure visibility */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow for better look */
+        }
+        /* styles that determines the looks of body */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #e3f2fd, #a3f990);
+            color: #333;
+            flex-direction: column; /* Ensures navbar stays on top */
+        }
+
+        /* container for agribot */
+        .agribot-container {
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            margin-top: 80px; /* Pushes content below the fixed navbar */
+            margin-left: 250px;
+        }
+        /* h3 is heading three*/
+        h3 {
+            font-size: 2.2rem;
+            color: #4CAF50;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+        /*styling for forms*/
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #555;
+        }
+        /*styling for input*/
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            background: #f5f5f5;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #4CAF50;
+            outline: none;
+            background: #ffffff;
+            box-shadow: 0 0 5px rgba(25, 118, 210, 0.3);
+        }
+        /*styling for submit buton*/
+        button[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: #4CAF50;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        button[type="submit"]:hover {
+            background: #0f4211;
+        }
+
+        p {
+            margin-top: 20px;
+            font-size: 1rem;
+            color: #666;
+        }
+
+        #response {
+            margin-top: 10px;
+            padding: 20px;
+            background: #e3f2fd;
+            border-left: 5px solid #4CAF50;
+            border-radius: 10px;
+            color: #0f4211;
+            font-weight: 500;
+        }
+
+        /* adjustments made for a more responsive experience */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 100px;
+            }
+
+            .agribot-container {
+                padding: 20px;
+            }
+
+            h3 {
+                font-size: 1.8rem;
+            }
+
+            input[type="text"], button[type="submit"] {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!--agribot box-->
+    <div class="agribot-container">
+        <h3>Agribot</h3>
+        <form method="POST">
+            <div class="form-group">
+                <label for="agribot_input">Ask Agribot a Question</label>
+                <input
+                    type="text"
+                    id="agribot_input"
+                    name="agribot_input"
+                    placeholder="Type your question here"
+                    required
+                />
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+
+        {% if response %}
+            <p>Bot Response:</p>
+            <div id="response">
+                {{ response }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
+{% endblock %} 

@@ -1,0 +1,238 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    /*styling all elements on supplychain management page */
+    .blockchain-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .form-section {
+        background: #f8f9fa;
+        padding: 1.5rem;
+        border-radius: 10px;
+        margin-bottom: 1.5rem;
+    }
+
+    .section-title {
+        color: #2E7D32;
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #4CAF50;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .input-group {
+        margin-bottom: 1rem;
+    }
+
+    .input-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #2c3e50;
+    }
+
+    .input-group input,
+    .input-group select {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+    }
+
+    .input-group input:focus,
+    .input-group select:focus {
+        outline: none;
+        border-color: #4CAF50;
+    }
+
+    .qr-section {
+        display: flex;
+        gap: 2rem;
+        margin-top: 2rem;
+        padding: 1.5rem;
+        background: #f8f9fa;
+        border-radius: 10px;
+        align-items: flex-start;
+    }
+
+    .qr-code {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .qr-info {
+        flex: 1;
+        padding: 1rem;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .submit-btn {
+        background: #2E7D32;
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1rem;
+        width: 100%;
+        margin-top: 1rem;
+        transition: all 0.3s;
+    }
+
+    .submit-btn:hover {
+        background: #1B5E20;
+        transform: translateY(-2px);
+    }
+
+    .view-button {
+        display: inline-block;
+        background: #2E7D32;
+        color: white;
+        text-decoration: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        margin-top: 1rem;
+        text-align: center;
+        transition: all 0.3s;
+    }
+
+    .view-button:hover {
+        background: #1B5E20;
+        transform: translateY(-2px);
+    }
+
+    .success-badge {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        background: #e8f5e9;
+        color: #2E7D32;
+        border-radius: 20px;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+    }
+
+    .qr-container {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .product-url {
+        flex: 1;
+    }
+</style>
+
+<div class="blockchain-container">
+    <h2>🌾 Farm Product Registration</h2>
+    
+    <form method="POST">
+        <!-- Product Information -->
+        <div class="form-section">
+            <h3 class="section-title">🥬 Product Details</h3>
+            <div class="input-group">
+                <label for="productName">Product Name</label>
+                <input type="text" id="productName" name="productName" required 
+                       placeholder="e.g., Organic Tomatoes">
+            </div>
+            <div class="input-group">
+                <label for="variety">Variety</label>
+                <input type="text" id="variety" name="variety" required 
+                       placeholder="e.g., Roma, Cherry, Beefsteak">
+            </div>
+            <div class="input-group">
+                <label for="organicStatus">Organic Status</label>
+                <select id="organicStatus" name="organicStatus" required>
+                    <option value="Organic">Organic</option>
+                    <option value="Conventional">Conventional</option>
+                    <option value="Transitional">Transitional Organic</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Farm Information -->
+        <div class="form-section">
+            <h3 class="section-title">🏡 Farm Details</h3>
+            <div class="input-group">
+                <label for="location">Farm Location</label>
+                <input type="text" id="location" name="location" required 
+                       placeholder="e.g., Fresno, California">
+            </div>
+            <div class="input-group">
+                <label for="certifications">Certifications</label>
+                <select id="certifications" name="certifications" multiple required>
+                    <option value="USDA Organic">USDA Organic</option>
+                    <option value="Non-GMO">Non-GMO Verified</option>
+                    <option value="Fair Trade">Fair Trade</option>
+                    <option value="Regenerative">Regenerative Organic</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Sustainability -->
+        <div class="form-section">
+            <h3 class="section-title">🌱 Sustainability</h3>
+            <div class="input-group">
+                <label for="carbonFootprint">Carbon Footprint (kg CO₂e/kg)</label>
+                <input type="number" id="carbonFootprint" name="carbonFootprint" 
+                       step="0.1" required>
+            </div>
+            <div class="input-group">
+                <label for="sustainablePractices">Sustainable Practices</label>
+                <select id="sustainablePractices" name="sustainablePractices" multiple required>
+                    <option value="Drip Irrigation">Drip Irrigation</option>
+                    <option value="Composting">Composting</option>
+                    <option value="Crop Rotation">Crop Rotation</option>
+                    <option value="Solar Power">Solar Power</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Harvest Information -->
+        <div class="form-section">
+            <h3 class="section-title">📅 Harvest Details</h3>
+            <div class="input-group">
+                <label for="harvestDate">Harvest Date</label>
+                <input type="date" id="harvestDate" name="harvestDate" required>
+            </div>
+        </div>
+
+        <button type="submit" class="submit-btn">🔗 Register Product & Generate QR</button>
+    </form>
+
+    <div class="qr-section">
+        {% if qr_code %}
+            <div class="qr-container">
+                <img src="data:image/png;base64,{{ qr_code }}" alt="QR Code">
+                <div class="product-url">
+                    <p>Product URL: <a href="{{ product_url }}">{{ product_url }}</a></p>
+                    <p>Product ID: {{ product_id }}</p>
+                </div>
+            </div>
+        {% else %}
+            <p>No QR code generated yet.</p>
+        {% endif %}
+    </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+<script>
+    </script>
+    {% endblock %}

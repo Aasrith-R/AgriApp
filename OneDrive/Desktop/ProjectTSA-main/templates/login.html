@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<style>
+  body {
+    background: linear-gradient(to right, #3e9149, #4e8f8f);
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    margin: 0;
+  }
+  /*styling login container */
+  .login-container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 15px;
+    max-width: 500px;
+    width: 100%;
+    color: black;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    text-align: center; /* Center content inside the container */
+    position: relative; /* To position the title at the top */
+  }
+  .login-container h3 {
+    margin: 0;
+    margin-bottom: 20px;
+    font-size: 32px;
+    color: black;
+    position: absolute;
+    top: -20px; 
+    left: 50%;
+    transform: translateX(-50%);
+    background: white; 
+    padding: 5px 15px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  .form-group label {
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+    font-size: 18px;
+  }
+  .form-control {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+  .btn-primary {
+    background-color: rgb(40, 167, 69);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 25px;
+    font-size: 18px;
+    cursor: pointer;
+    width: 100%;
+  }
+  /*changes styling when cursor is hovering*/
+  .btn-primary:hover {
+    background-color: #218838;
+  }
+</style>
+<!--formatting login page and its forms-->
+<div class="login-container">
+  <h3>Login</h3>
+  <form method="POST">
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        name="email"
+        placeholder="Enter email"
+      />
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        name="password"
+        placeholder="Enter password"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+  </form>
+</div>
